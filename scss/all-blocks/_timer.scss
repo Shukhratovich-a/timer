@@ -1,0 +1,155 @@
+.timer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  background: linear-gradient(116.82deg, #494f74 0%, #3a3f5e 100%);
+  mix-blend-mode: normal;
+  box-shadow: -12px -12px 32px rgba(73, 80, 115, 0.72), 12px 12px 32px #2e334e,
+    inset 2px 2px 2px rgba(83, 92, 136, 0.7), inset -1px -1px 0.2px rgba(33, 37, 53, 0.2);
+  border-radius: 50%;
+}
+
+.timer__aside {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 188px;
+  height: 188px;
+  background: linear-gradient(116.82deg, #494f74 0%, #3a3f5e 100%);
+  mix-blend-mode: normal;
+  box-shadow: -12px -12px 32px rgba(73, 80, 115, 0.72), 12px 12px 32px #2e334e,
+    inset 2px 2px 2px rgba(83, 92, 136, 0.7);
+  border-radius: 50%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    display: block;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: #3c4163;
+    box-shadow: inset 1px 1px 1px #343952;
+    filter: drop-shadow(1px 1px 1px rgba(90, 97, 141, 0.81));
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    display: block;
+    width: 172px;
+    height: 172px;
+    border-radius: 50%;
+    background: linear-gradient(116.82deg, #494f74 0%, #3a3f5e 100%);
+    box-shadow: inset 1px 1px 1px rgba(90, 97, 141, 0.81), 1px 1px 1px #343952;
+  }
+
+  .timer__aside__time {
+    z-index: 99;
+    font-family: "Quicksand";
+    width: 110px;
+    height: 48px;
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    font-size: 48px;
+    line-height: 48px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    background: linear-gradient(360deg, #d2d6ef 15.87%, #9299c2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 1px 1px rgba(38, 43, 70, 0.7));
+    border: none;
+    outline: none;
+    appearance: none;
+    -moz-appearance: textfield;
+  }
+
+  .timer__aside__text {
+    position: relative;
+    z-index: 999;
+    font-family: "Quicksand";
+    margin: 0;
+    font-size: 24px;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    background: linear-gradient(360deg, #d2d6ef 15.87%, #9299c2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 1px 1px rgba(38, 43, 70, 0.7));
+  }
+}
+
+.timer__circle {
+  position: absolute;
+  z-index: 9;
+  transform: rotate(-90deg);
+  width: 180px;
+  height: 180px;
+
+  svg {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    overflow: visible;
+  }
+
+  &--active {
+    animation-duration: 0, 0;
+
+    svg {
+      animation-duration: inherit;
+      animation-delay: inherit;
+    }
+    .circle {
+      animation-name: dash, out;
+      animation-timing-function: linear, linear;
+      animation-duration: inherit;
+      animation-delay: inherit;
+      -webkit-animation-play-state: running;
+    }
+  }
+}
+
+.circle {
+  fill: none;
+  stroke: url(#gradient);
+  stroke-width: 4px;
+  stroke-dasharray: 556;
+  stroke-dashoffset: 555;
+  -webkit-animation-play-state: paused;
+}
+
+.circle--blur {
+  filter: url(#f1);
+  opacity: 0.7;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes out {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 555;
+  }
+}

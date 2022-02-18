@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.min.css" />
+    <title>Timer</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <button class="header__button" name="sound"></button>
+          <p class="header__heading">Pomodoro</p>
+          <button class="header__button" name="notification"></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="timer">
+        <div class="container">
+          <div class="timer__inner">
+            <div class="timer__aside">
+              <input class="timer__aside__time" type="number" value="10" min="0" />
+
+              <p class="timer__aside__text">minutes</p>
+              <div class="timer__circle">
+                <svg width="180" height="180" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+                  <radialGradient
+                    id="gradient"
+                    cx="50.3%"
+                    cy="50.3%"
+                    x1="0%"
+                    y1="0%"
+                    x2="50%"
+                    y2="100%"
+                  >
+                    <stop offset="98%" stop-color="#612FF5" />
+                    <stop offset="100%" stop-color="#855CFF" />
+                  </radialGradient>
+
+                  <defs>
+                    <filter id="f1" width="200%" height="200%" x="-50%" y="-50%">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+                    </filter>
+                  </defs>
+
+                  <circle class="circle" cx="90" cy="90" r="88" stroke-linecap="round"></circle>
+                  <circle
+                    class="circle circle--blur"
+                    cx="90"
+                    cy="92"
+                    r="88"
+                    stroke-linecap="round"
+                  ></circle>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <button class="footer__button"></button>
+      </div>
+    </footer>
+
+    <script src="./js/utils.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
