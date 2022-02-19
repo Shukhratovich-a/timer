@@ -110,18 +110,24 @@
 
   &--active {
     animation-duration: 0, 0;
+    -webkit-animation-play-state: running;
 
     svg {
       animation-duration: inherit;
       animation-delay: inherit;
+      -webkit-animation-play-state: inherit;
     }
     .circle {
       animation-name: dash, out;
       animation-timing-function: linear, linear;
       animation-duration: inherit;
       animation-delay: inherit;
-      -webkit-animation-play-state: running;
+      -webkit-animation-play-state: inherit;
     }
+  }
+
+  &--paused {
+    -webkit-animation-play-state: paused;
   }
 }
 
