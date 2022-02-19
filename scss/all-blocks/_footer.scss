@@ -55,3 +55,11 @@
     box-shadow: -6px -6px 20px rgba(85, 93, 131, 0.2), 8px 8px 18px rgba(54, 59, 87, 0.1);
   }
 }
+
+@media only screen and(max-height: 650px) {
+  .footer{
+    .container{
+      padding: 32px 0;
+    }
+  }
+}
