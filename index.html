@@ -24,7 +24,21 @@
         <div class="container">
           <div class="timer__inner">
             <div class="timer__aside">
-              <input class="timer__aside__time" type="number" value="10" min="0" />
+              <div class="timer__aside__time">
+                <div class="timer__clock">
+                  <button class="timer__clock__button" name="first-top"></button>
+                  <span class="timer__clock__number" aria-label="first">00</span>
+                  <button class="timer__clock__button" name="first-bottom"></button>
+                </div>
+
+                <span class="timer__dots">:</span>
+
+                <div class="timer__clock">
+                  <button class="timer__clock__button" name="second-top"></button>
+                  <span class="timer__clock__number" aria-label="second">00</span>
+                  <button class="timer__clock__button" name="second-bottom"></button>
+                </div>
+              </div>
 
               <p class="timer__aside__text">secundes</p>
               <div class="timer__circle">

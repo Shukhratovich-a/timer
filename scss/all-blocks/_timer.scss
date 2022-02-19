@@ -55,29 +55,13 @@
     box-shadow: inset 1px 1px 1px rgba(90, 97, 141, 0.81), 1px 1px 1px #343952;
   }
 
-  .timer__aside__time {
-    z-index: 99;
-    font-family: "Quicksand";
-    width: 110px;
-    height: 48px;
-    margin: 0;
+  &__time {
+    display: flex;
+    align-items: center;
     margin-bottom: 5px;
-    padding: 0;
-    font-size: 48px;
-    line-height: 48px;
-    text-align: center;
-    letter-spacing: -0.02em;
-    background: linear-gradient(360deg, #d2d6ef 15.87%, #9299c2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(1px 1px 1px rgba(38, 43, 70, 0.7));
-    border: none;
-    outline: none;
-    appearance: none;
-    -moz-appearance: textfield;
   }
 
-  .timer__aside__text {
+  &__text {
     position: relative;
     z-index: 999;
     font-family: "Quicksand";
@@ -90,6 +74,92 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(1px 1px 1px rgba(38, 43, 70, 0.7));
+  }
+}
+
+.timer__clock__number {
+  pointer-events: none;
+}
+
+.timer__clock__button {
+  position: absolute;
+  right: 50%;
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+
+  &::after {
+    content: "";
+    transform: rotate(90deg);
+    display: block;
+    width: 10px;
+    height: 15px;
+    margin: auto;
+    background-image: url("../images/marker.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &:first-child {
+    top: 0;
+    transform: translate(50%, -40%);
+    &::after {
+      transform: rotate(270deg);
+    }
+  }
+  &:last-child {
+    bottom: 0;
+    transform: translate(50%, 50%);
+  }
+}
+
+.timer__dots {
+  z-index: 99;
+  transform: translateY(-4px);
+  font-family: "Quicksand";
+  font-size: 48px;
+  line-height: 48px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  background: linear-gradient(360deg, #d2d6ef 15.87%, #9299c2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(1px 1px 1px rgba(38, 43, 70, 0.7));
+}
+
+.timer--active {
+  .timer__dots {
+    animation: dots 1s ease infinite;
+  }
+}
+
+.timer__clock {
+  position: relative;
+  z-index: 99;
+  font-family: "Quicksand";
+  font-size: 48px;
+  line-height: 48px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  background: linear-gradient(360deg, #d2d6ef 15.87%, #9299c2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(1px 1px 1px rgba(38, 43, 70, 0.7));
+
+  &:hover {
+    .timer__clock__button {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 }
 
@@ -157,5 +227,17 @@
   }
   to {
     stroke-dashoffset: 555;
+  }
+}
+
+@keyframes dots {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
