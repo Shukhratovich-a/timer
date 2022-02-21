@@ -7,6 +7,7 @@ const elTimerSecond = selectElement('.timer__clock__number[aria-label="second"]'
 
 let firstTime = 0;
 let secondTime = 0;
+let isPaused = true;
 
 const setTime = (button, time, property) => {
   if (time === 0 && button.name === property + "-bottom") time = 59;
@@ -27,6 +28,10 @@ const normalizeTime = () => {
   if (secondTime === -1) firstTime--, (secondTime = 59);
 };
 
+const convertTime = (firstTime, secondTime) => {
+  return firstTime * 60 + secondTime;
+};
+
 elTimer.addEventListener("click", (evt) => {
   const timerButton = evt.target;
   firstTime = setTime(timerButton, firstTime, "first");
@@ -35,14 +40,31 @@ elTimer.addEventListener("click", (evt) => {
 });
 
 elTimerButton.addEventListener("click", () => {
-  if (firstTime > 0 || secondTime > 0) {
-    const interval = setInterval(() => {
-      secondTime--;
-      if (firstTime === 0 && secondTime === 0) clearInterval(interval);
-      normalizeTime();
-      setText();
-    }, 1000);
-  }
+  if (isPaused) {
+    if (firstTime > 0 || secondTime > 0) {
+      elTimerButton.classList.add("footer__button--active");
+      isPaused = false;
+      const interval = setInterval(() => {
+        secondTime--;
+        if (firstTime <= 0 && secondTime <= 0) {
+          clearInterval(interval);
+          setTimeout(() => {
+            elTimerNode.classList.remove("timer--active");
+          }, 1000);
+          isPaused = true;
+        }
+        normalizeTime();
+        setText();
+      }, 1000);
 
-  elTimerNode.classList.add("timer--active");
+      elTimerNode.classList.add("timer--active");
+      selectElement(".timer--active svg").style.animationDuration =
+        0.25 + "s," + convertTime(firstTime, secondTime) + "s";
+    } else return;
+  } else {
+    isPaused = true;
+    elTimerButton.classList.remove("footer__button--active");
+    clearInterval(interval);
+    return;
+  }
 });

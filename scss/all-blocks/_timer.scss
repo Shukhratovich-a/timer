@@ -137,8 +137,18 @@
 }
 
 .timer--active {
+  svg {
+    animation-duration: 0s, 0s;
+  }
+
   .timer__dots {
     animation: dots 1s ease infinite;
+  }
+
+  .circle {
+    animation: out 0s linear, dash 0s linear;
+    animation-delay: 0s, 0.25s;
+    animation-duration: inherit;
   }
 }
 
@@ -177,28 +187,6 @@
     transform: translate(50%, -50%);
     overflow: visible;
   }
-
-  &--active {
-    animation-duration: 0, 0;
-    -webkit-animation-play-state: running;
-
-    svg {
-      animation-duration: inherit;
-      animation-delay: inherit;
-      -webkit-animation-play-state: inherit;
-    }
-    .circle {
-      animation-name: dash, out;
-      animation-timing-function: linear, linear;
-      animation-duration: inherit;
-      animation-delay: inherit;
-      -webkit-animation-play-state: inherit;
-    }
-  }
-
-  &--paused {
-    -webkit-animation-play-state: paused;
-  }
 }
 
 .circle {
@@ -215,13 +203,16 @@
   opacity: 0.7;
 }
 
-@keyframes dash {
+@keyframes out {
+  from {
+    stroke-dashoffset: 555;
+  }
   to {
     stroke-dashoffset: 0;
   }
 }
 
-@keyframes out {
+@keyframes dash {
   from {
     stroke-dashoffset: 0;
   }
