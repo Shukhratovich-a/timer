@@ -66,5 +66,6 @@ elTimerButton.addEventListener("click", () => {
     elTimerButton.classList.remove("footer__button--active");
     clearInterval(interval);
     return;
+    const webkit;
   }
 });
