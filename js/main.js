@@ -12,7 +12,7 @@ let isPaused = true;
 
 const recorder = new webkitSpeechRecognition();
 
-recorder.lang = "uz-UZ";
+recorder.lang = "en-US";
 
 const setTime = (button, time, property) => {
   if (time === 0 && button.name === property + "-bottom") time = 59;
@@ -80,7 +80,7 @@ elTimerButton.addEventListener("click", startTimer);
 recorder.onresult = (result) => {
   const value = result.results[0][0].transcript.toLowerCase();
   print(value);
-  if (value === "ishla") startTimer();
+  if (value === "start") startTimer();
 };
 
 elTimerMicrophone.addEventListener("click", () => {
