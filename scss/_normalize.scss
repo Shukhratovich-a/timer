@@ -94,6 +94,7 @@ input {
 button,
 select {
   text-transform: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button,
