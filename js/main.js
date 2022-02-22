@@ -1,6 +1,7 @@
 const elTimerNode = selectElement(".timer");
-const elTimerButton = selectElement(".footer__button");
 const elTimer = selectElement(".timer__aside__time");
+const elTimerMicrophone = selectElement('.header__button[name="microphone"]');
+const elTimerButton = selectElement(".footer__button");
 const elTimerCircleNode = selectElement(".timer__circle");
 const elTimerFirst = selectElement('.timer__clock__number[aria-label="first"]');
 const elTimerSecond = selectElement('.timer__clock__number[aria-label="second"]');
@@ -8,6 +9,10 @@ const elTimerSecond = selectElement('.timer__clock__number[aria-label="second"]'
 let firstTime = 0;
 let secondTime = 0;
 let isPaused = true;
+
+const recorder = new webkitSpeechRecognition();
+
+recorder.lang = "en-US";
 
 const setTime = (button, time, property) => {
   if (time === 0 && button.name === property + "-bottom") time = 59;
@@ -33,13 +38,14 @@ const convertTime = (firstTime, secondTime) => {
 };
 
 elTimer.addEventListener("click", (evt) => {
+  if (!isPaused) return;
   const timerButton = evt.target;
   firstTime = setTime(timerButton, firstTime, "first");
   secondTime = setTime(timerButton, secondTime, "second");
   setText();
 });
 
-elTimerButton.addEventListener("click", () => {
+const startTimer = () => {
   if (isPaused) {
     if (firstTime > 0 || secondTime > 0) {
       elTimerButton.classList.add("footer__button--active");
@@ -52,6 +58,7 @@ elTimerButton.addEventListener("click", () => {
             elTimerNode.classList.remove("timer--active");
           }, 1000);
           isPaused = true;
+          elTimerButton.classList.remove("footer__button--active");
         }
         normalizeTime();
         setText();
@@ -59,13 +66,23 @@ elTimerButton.addEventListener("click", () => {
 
       elTimerNode.classList.add("timer--active");
       selectElement(".timer--active svg").style.animationDuration =
-        0.25 + "s," + convertTime(firstTime, secondTime) + "s";
+        0.25 + "s," + Number(convertTime(firstTime, secondTime) - 0.25) + "s";
     } else return;
   } else {
+    return;
     isPaused = true;
     elTimerButton.classList.remove("footer__button--active");
-    clearInterval(interval);
-    return;
-    const webkit;
   }
+};
+
+elTimerButton.addEventListener("click", startTimer);
+
+recorder.onresult = (result) => {
+  const value = result.results[0][0].transcript.toLowerCase();
+  print(value);
+  if (value === "start") startTimer();
+};
+
+elTimerMicrophone.addEventListener("click", () => {
+  recorder.start();
 });
